@@ -1,8 +1,14 @@
-import movies from "@/app/dummy.json";
 import styles from "./page.module.css";
 
-export default function Page({ params }: { params: { id: string | string[] } }) {
+export default async function Page({ params }: { params: { id: string | string[] } }) {
     console.log(params.id);
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`);
+    if (!res.ok) {
+        return <div>오류 발생</div>;
+    }
+
+    const movie = await res.json();
     const {
         id,
         title,
@@ -13,7 +19,7 @@ export default function Page({ params }: { params: { id: string | string[] } }) 
         posterImgUrl,
         releaseDate,
         genres,
-    } = movies[1];
+    } = movie;
     return (
         <div className={styles.container}>
             <div
