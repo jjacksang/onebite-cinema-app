@@ -1,12 +1,20 @@
+import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 
-export default async function Page({ params }: { params: { id: string | string[] } }) {
-    console.log(params.id);
+export const dynamicParams = false;
 
+export function generateStaticParams() {
+    return [{ id: "831815" }, { id: "693134" }, { id: "945961" }];
+}
+
+export default async function Page({ params }: { params: { id: string | string[] } }) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`, {
         cache: "force-cache",
     });
     if (!res.ok) {
+        if (res.status === 404) {
+            notFound();
+        }
         return <div>오류 발생</div>;
     }
 
