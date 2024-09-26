@@ -1,7 +1,7 @@
 import styles from "./movie-Item.module.css";
 
 import Link from "next/link";
-import { MovieData } from "../type/type";
+import { MovieData } from "../utils/type";
 
 export const MovieItem = (props: MovieData) => {
     return (
