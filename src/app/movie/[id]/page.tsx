@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import { MovieData } from "@/app/utils/type";
+import { delay } from "@/app/utils/delay";
 
 export const dynamicParams = false;
 
@@ -23,6 +24,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: { id: string | string[] } }) {
+    await delay(7000);
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`, {
         cache: "force-cache",
     });
