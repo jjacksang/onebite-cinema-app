@@ -1,10 +1,25 @@
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
+import { MovieData } from "@/app/utils/type";
 
 export const dynamicParams = false;
 
-export function generateStaticParams() {
-    return [{ id: "831815" }, { id: "693134" }, { id: "945961" }];
+// movie데이터를 미리 패칭하여 movie/[id]로 접근 시 미리 준비해둔 데이터를 반환
+export async function generateStaticParams() {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`);
+
+        if (!res.ok) {
+            throw new Error("오류 발생");
+        }
+
+        const movies: MovieData[] = await res.json();
+
+        return movies.map(({ id }) => ({ id: id.toString() }));
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
 }
 
 export default async function Page({ params }: { params: { id: string | string[] } }) {
