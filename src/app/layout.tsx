@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
-        <html lang="kr">
+        <html lang="ko">
             <body>
                 <div className={style.container}>
                     <header>

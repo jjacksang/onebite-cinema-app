@@ -1,0 +1,9 @@
+.container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 150%;
+    border-radius: 5px;
+
+    background-color: #d6cbcb;
+}

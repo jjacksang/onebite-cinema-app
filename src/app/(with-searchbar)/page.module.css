@@ -14,12 +14,12 @@
 .reco_container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    grid-gap: 12px;
     padding-bottom: 20px;
 }
 
 .all_container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
+    grid-gap: 5px;
 }
