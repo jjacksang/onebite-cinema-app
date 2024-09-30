@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
-import { MovieData } from "@/app/utils/type";
+import { MovieData, ReviewData } from "@/app/utils/type";
+import { createReviewAction } from "@/actions/create-reivew-action";
+import ReviewItem from "@/app/components/review-item";
+import ReviewEditor from "@/app/components/review-editor";
 
 export const dynamicParams = false;
 
@@ -22,8 +25,8 @@ export async function generateStaticParams() {
     }
 }
 
-export default async function Page({ params }: { params: { id: string | string[] } }) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`, {
+async function MovieDetail({ movieId }: { movieId: string }) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${movieId}`, {
         cache: "force-cache",
     });
     if (!res.ok) {
@@ -63,6 +66,33 @@ export default async function Page({ params }: { params: { id: string | string[]
 
             <div className={styles.subTitle}>{subTitle}</div>
             <div className={styles.description}>{description}</div>
+        </div>
+    );
+}
+
+async function ReviewList({ movieId }: { movieId: string }) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/movie/${movieId}`);
+
+    if (!res.ok) {
+        throw new Error(`Review fetch failed : ${res.statusText}`);
+    }
+
+    const reviews: ReviewData[] = await res.json();
+    return (
+        <section>
+            {reviews.map((review) => (
+                <ReviewItem key={`review-item-${review.id}`} {...review} />
+            ))}
+        </section>
+    );
+}
+
+export default function Page({ params }: { params: { id: string } }) {
+    return (
+        <div className={styles.container}>
+            <MovieDetail movieId={params.id} />
+            <ReviewEditor movieId={params.id} />
+            <ReviewList movieId={params.id} />
         </div>
     );
 }
