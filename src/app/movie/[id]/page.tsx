@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import { MovieData, ReviewData } from "@/app/utils/type";
-import { createReviewAction } from "@/actions/create-reivew-action";
 import ReviewItem from "@/app/components/review-item";
 import ReviewEditor from "@/app/components/review-editor";
 
@@ -71,7 +70,9 @@ async function MovieDetail({ movieId }: { movieId: string }) {
 }
 
 async function ReviewList({ movieId }: { movieId: string }) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/movie/${movieId}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/movie/${movieId}`, {
+        next: { tags: [`review-${movieId}`] },
+    });
 
     if (!res.ok) {
         throw new Error(`Review fetch failed : ${res.statusText}`);
