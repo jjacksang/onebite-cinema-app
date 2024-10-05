@@ -1,0 +1,22 @@
+.modal {
+    width: 80%;
+    max-width: 680px;
+
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 2px solid rgba(30, 30, 30);
+
+    background-color: black;
+
+    color: white;
+
+    -ms-overflow-style: none;
+}
+
+.modal::-wepkit-scrollbar {
+    display: none;
+}
+
+.modal::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}

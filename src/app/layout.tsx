@@ -3,7 +3,10 @@ import ".//globals.css";
 import style from "./layout.module.css";
 import Link from "next/link";
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+    children,
+    modal,
+}: Readonly<{ children: ReactNode; modal: ReactNode }>) {
     return (
         <html lang="ko">
             <body>
@@ -13,6 +16,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     </header>
                     <main>{children}</main>
                 </div>
+                {modal}
+                <div id="modal-root"></div>
             </body>
         </html>
     );
