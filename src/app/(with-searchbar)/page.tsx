@@ -4,6 +4,7 @@ import { MovieData } from "../utils/type";
 import { delay } from "../utils/delay";
 import { Suspense } from "react";
 import MovieListSkeleton from "../components/skeleton/movie-list-skeleton";
+import { Metadata } from "next";
 
 // 변화가 수시로 있을 경우가 있기에 next: { revaildate: 3 } => 3초 마다 갱신
 async function RecoMovies() {
@@ -46,6 +47,16 @@ async function AllMovies() {
         </>
     );
 }
+
+export const metadata: Metadata = {
+    title: "한입 무비",
+    description: "한입 무비에 오신걸 환영합니다.",
+    openGraph: {
+        title: "한입 무비",
+        description: "한입 무비에 오신걸 환영합니다.",
+        images: ["/thumbnail.png"],
+    },
+};
 
 export default function Home() {
     return (
