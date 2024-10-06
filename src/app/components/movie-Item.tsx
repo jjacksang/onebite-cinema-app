@@ -2,11 +2,21 @@ import styles from "./movie-Item.module.css";
 
 import Link from "next/link";
 import { MovieData } from "../utils/type";
+import Image from "next/image";
 
-export const MovieItem = (props: MovieData) => {
+interface MovieItemProps extends MovieData {
+    height?: number;
+}
+
+export const MovieItem = (props: MovieItemProps) => {
     return (
         <Link href={`/movie/${props.id}`} className={styles.container}>
-            <img src={props.posterImgUrl} />
+            <Image
+                src={props.posterImgUrl}
+                alt={`영화 ${props.title}의 표지 이미지`}
+                width={258}
+                height={props.height}
+            />
         </Link>
     );
 };

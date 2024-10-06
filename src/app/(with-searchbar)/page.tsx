@@ -20,7 +20,7 @@ async function RecoMovies() {
     return (
         <>
             {recoMovies.slice(0, 3).map((movie) => (
-                <MovieItem key={`reco-${movie.id}`} {...movie} />
+                <MovieItem key={`reco-${movie.id}`} {...movie} height={392} />
             ))}
         </>
     );
@@ -41,7 +41,7 @@ async function AllMovies() {
     return (
         <>
             {allMovies.map((movie) => (
-                <MovieItem key={`all-${movie.id}`} {...movie} />
+                <MovieItem key={`all-${movie.id}`} {...movie} height={258} />
             ))}
         </>
     );
