@@ -38,17 +38,8 @@ async function MovieDetail({ movieId }: { movieId: string }) {
     }
 
     const movie = await res.json();
-    const {
-        id,
-        title,
-        subTitle,
-        description,
-        company,
-        runtime,
-        posterImgUrl,
-        releaseDate,
-        genres,
-    } = movie;
+    const { title, subTitle, description, company, runtime, posterImgUrl, releaseDate, genres } =
+        movie;
     return (
         <div className={styles.container}>
             <div
